@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2e5c38">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Field Companion">
+  <meta name="description" content="Native plant identification and field logging for SE Iowa property stewardship">
+  <title>Field Companion</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ── Header ── -->
+  <header id="header">
+    <div>
+      <h1>🌿 Field Companion</h1>
+      <p>Paul Winer · SE Iowa · 52556</p>
+    </div>
+    <button id="settings-btn" title="Settings">⚙️</button>
+  </header>
+
+  <!-- ── Offline Banner ── -->
+  <div id="offline-banner">📵 Offline — Plant ID unavailable. Log, Zones, Tasks, Drive still work.</div>
+
+  <!-- ── Tab Screens ── -->
+  <div id="screens">
+
+    <!-- ════ PLANT ID ════ -->
+    <div id="screen-plant-id" class="screen active">
+
+      <div class="card">
+        <div class="card-title">Identify a plant</div>
+
+        <!-- Photo upload -->
+        <div class="field">
+          <div class="upload-box" id="pid-upload-box">
+            <span class="ico">📷</span>
+            <p>Tap to take photo or choose from gallery</p>
+            <input type="file" id="pid-photo-input" accept="image/*" capture="environment">
+          </div>
+          <img id="pid-photo-preview" class="photo-preview" alt="Selected plant photo">
+        </div>
+
+        <!-- Zone + GPS row -->
+        <div class="row2">
+          <div class="field">
+            <label for="pid-zone">Zone</label>
+            <select id="pid-zone">
+              <option value="">— select —</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>GPS</label>
+            <div class="gps-row">
+              <button class="btn btn-outline btn-sm" id="pid-gps-btn" type="button">📍 Get</button>
+            </div>
+            <div id="pid-gps-status" class="gps-status" style="margin-top:4px;font-size:11px"></div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="field">
+          <label for="pid-notes">Notes (optional)</label>
+          <input type="text" id="pid-notes" placeholder="Size, location details, characteristics…">
+        </div>
+
+        <!-- API key warning -->
+        <div id="pid-apikey-warn" class="alert alert-warn" style="display:none">
+          ⚠️ No API key set — Plant ID is disabled.
+          <button type="button" onclick="App.openSettings()" style="background:none;border:none;color:var(--amber);font-weight:700;cursor:pointer;font-size:12px;padding:0 0 0 4px">Go to Settings →</button>
+        </div>
+
+        <button class="btn" id="pid-identify-btn" type="button" disabled>Identify plant</button>
+      </div>
+
+      <!-- Spinner (hidden until API call) -->
+      <div id="pid-spinner" class="spinner-row" style="display:none">
+        <div class="spinner"></div>
+        Analyzing plant — this takes ~10 seconds…
+      </div>
+
+      <!-- Result area -->
+      <div id="pid-result" style="display:none"></div>
+
+    </div><!-- /screen-plant-id -->
+
+
+    <!-- ════ LOG ════ -->
+    <div id="screen-log" class="screen">
+
+      <!-- Sub-tab buttons -->
+      <div class="subtabs">
+        <button class="subtab-btn log-subtab active" data-mode="new">+ New entry</button>
+        <button class="subtab-btn log-subtab" data-mode="history">📋 History</button>
+        <button class="subtab-btn log-subtab" data-mode="export">⬇️ Export</button>
+      </div>
+
+      <!-- NEW ENTRY panel -->
+      <div id="log-panel-new">
+        <div class="card">
+          <div class="card-title">New observation</div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="log-date">Date</label>
+              <input type="date" id="log-date">
+            </div>
+            <div class="field">
+              <label for="log-zone">Zone</label>
+              <select id="log-zone">
+                <option value="">— select —</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>GPS</label>
+            <div class="gps-row">
+              <button class="btn btn-outline btn-sm" id="log-gps-btn" type="button">📍 Capture</button>
+              <span id="log-gps-status" style="font-size:11px"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="log-location-desc">Location description</label>
+            <input type="text" id="log-location-desc" placeholder="e.g. NW corner near creek, 20ft from water">
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label for="log-common-name">Common name *</label>
+              <input type="text" id="log-common-name" placeholder="e.g. Bush Honeysuckle">
+            </div>
+            <div class="field">
+              <label for="log-latin-name">Latin name</label>
+              <input type="text" id="log-latin-name" placeholder="e.g. Lonicera maackii">
+            </div>
+          </div>
+
+          <div class="row3">
+            <div class="field">
+              <label for="log-native-status">Native?</label>
+              <select id="log-native-status">
+                <option value="Unknown">Unknown</option>
+                <option value="Native">Native</option>
+                <option value="Invasive">Invasive</option>
+                <option value="Non-native">Non-native</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="log-keystone">Keystone?</label>
+              <select id="log-keystone">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="log-obs-type">Type</label>
+              <select id="log-obs-type">
+                <option value="Observation">Observation</option>
+                <option value="Invasive–remove">Invasive–remove</option>
+                <option value="Native–protect">Native–protect</option>
+                <option value="Native–plant">Native–plant</option>
+                <option value="Treatment">Treatment</option>
+                <option value="Monitor">Monitor</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="log-action-needed">Action needed</label>
+            <input type="text" id="log-action-needed" placeholder="e.g. Cut + paint stumps glyphosate">
+          </div>
+
+          <div class="field">
+            <label for="log-notes">Notes</label>
+            <textarea id="log-notes" placeholder="Any additional observations…" rows="2"></textarea>
+          </div>
+
+          <button class="btn" id="log-save-btn" type="button">💾 Save observation</button>
+        </div>
+      </div><!-- /log-panel-new -->
+
+      <!-- HISTORY panel -->
+      <div id="log-panel-history" style="display:none">
+        <div class="field" style="margin-bottom:12px">
+          <label for="log-history-zone-filter">Filter by zone</label>
+          <select id="log-history-zone-filter">
+            <option value="">All zones</option>
+          </select>
+        </div>
+        <div id="log-history-list">
+          <div class="empty-state">
+            <span class="ico">📋</span>
+            No observations yet. Use Plant ID or New Entry to log plants.
+          </div>
+        </div>
+      </div><!-- /log-panel-history -->
+
+      <!-- EXPORT panel -->
+      <div id="log-panel-export" style="display:none">
+        <div class="card">
+          <div class="card-title">Export to Google Sheets</div>
+          <p style="font-size:13px;color:var(--label);line-height:1.6;margin-bottom:14px">
+            Downloads all saved observations as a CSV file. Open Google Sheets, click the first empty row in your Field Observation Log, then <strong>File → Import → Upload</strong> and paste rows — or just paste the file contents directly.
+          </p>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:14px">
+            Columns: Date · Zone · Lat · Lng · Location · Common Name · Latin Name · Native · Keystone · Type · Action · Photo · Logged By · Notes
+          </p>
+          <button class="btn" id="log-export-btn" type="button">⬇️ Download CSV file</button>
+        </div>
+      </div><!-- /log-panel-export -->
+
+    </div><!-- /screen-log -->
+
+
+    <!-- ════ ZONES ════ -->
+    <div id="screen-zones" class="screen">
+      <div id="zones-container">
+        <div class="empty-state"><span class="ico">🗺️</span>Loading zones…</div>
+      </div>
+    </div>
+
+
+    <!-- ════ TASKS ════ -->
+    <div id="screen-tasks" class="screen">
+      <div id="tasks-container">
+        <div class="empty-state"><span class="ico">✅</span>Loading tasks…</div>
+      </div>
+    </div>
+
+
+    <!-- ════ DRIVE ════ -->
+    <div id="screen-drive" class="screen">
+      <div id="drive-container">
+        <div class="empty-state"><span class="ico">📁</span>Loading links…</div>
+      </div>
+    </div>
+
+  </div><!-- /screens -->
+
+
+  <!-- ── Bottom Tab Nav ── -->
+  <nav id="tab-nav">
+    <button class="tab-btn active" data-tab="plant-id">
+      <span class="ico">🔍</span>Plant ID
+    </button>
+    <button class="tab-btn" data-tab="log">
+      <span class="ico">📍</span>Log
+    </button>
+    <button class="tab-btn" data-tab="zones">
+      <span class="ico">🗺️</span>Zones
+    </button>
+    <button class="tab-btn" data-tab="tasks">
+      <span class="ico">✅</span>Tasks
+    </button>
+    <button class="tab-btn" data-tab="drive">
+      <span class="ico">📁</span>Drive
+    </button>
+  </nav>
+
+  <!-- ── Toast ── -->
+  <div id="toast"></div>
+
+</div><!-- /app -->
+
+
+<!-- ════ SETTINGS PANEL ════ -->
+<div id="settings-panel">
+  <div id="settings-inner">
+    <div class="settings-handle"></div>
+    <div class="settings-header">
+      <h2>⚙️ Settings</h2>
+      <button id="settings-close">✕</button>
+    </div>
+
+    <!-- API key -->
+    <div class="card">
+      <div class="card-title">Anthropic API key</div>
+      <div class="alert alert-warn" style="margin-bottom:12px;font-size:11px;line-height:1.6">
+        Your API key is stored only on this device and sent only to api.anthropic.com for plant identification.
+        Get a key at <strong>console.anthropic.com</strong> — it's separate from Claude Pro.
+        Expect ~$0.01 per plant ID.
+      </div>
+      <div class="field">
+        <label for="api-key-input">API key</label>
+        <input type="password" id="api-key-input" placeholder="sk-ant-…" autocomplete="off">
+      </div>
+      <div id="api-key-status" class="alert alert-warn" style="margin:8px 0"></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-sm" id="api-key-save" type="button">Save key</button>
+        <button class="btn btn-sm btn-outline" id="api-key-clear" type="button">Remove key</button>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="card">
+      <div class="card-title">About</div>
+      <div id="settings-version" style="font-size:12px;color:var(--label);line-height:1.8">
+        Field Companion v1.0
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6">
+        Zone &amp; task data: May 2026<br>
+        Hosting: GitHub Pages (free)<br>
+        Add to Home Screen for PWA/offline use
+      </div>
+    </div>
+
+    <!-- Drive links quick-edit note -->
+    <div class="card">
+      <div class="card-title">📁 Add your Drive links</div>
+      <div style="font-size:12px;color:var(--label);line-height:1.6">
+        Edit <code>public/js/data/drive-links.json</code> in your GitHub repo to add your actual Google Drive URLs. Replace the placeholder <code>PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE</code> values with the share links from your Drive documents.
+      </div>
+    </div>
+
+  </div>
+</div><!-- /settings-panel -->
+
+
+<!-- ── Scripts ── -->
+<script src="js/app.js"></script>
+<script src="js/plant-id.js"></script>
+<script src="js/logger.js"></script>
+<script src="js/zones.js"></script>
+<script src="js/tasks.js"></script>
+<script>
+/* Drive tab — inline since it's simple enough */
+const Drive = (() => {
+  function init() {
+    App.registerTab('drive', { onShow });
+    onShow();
+  }
+  function onShow() {
+    const data = App.getDriveLinks();
+    const container = document.getElementById('drive-container');
+    if (!container) return;
+    if (!data || !data.sections) {
+      container.innerHTML = '<div class="alert alert-warn">Drive links not loaded.</div>';
+      return;
+    }
+    container.innerHTML = data.sections.map(section => `
+      <div class="drive-section-title">${esc(section.title)}</div>
+      ${section.links.map(link => {
+        const isPlaceholder = link.url.startsWith('PASTE_');
+        return `
+          <a class="drive-link" href="${isPlaceholder ? '#' : link.url}" target="${isPlaceholder ? '' : '_blank'}" rel="noopener"
+            ${isPlaceholder ? 'onclick="App.toast(\'Add your Drive URL in the settings card\');return false;"' : ''}>
+            <span class="dl-ico">${link.icon}</span>
+            <div>
+              <div class="dl-name">${esc(link.name)}</div>
+              <div class="dl-type">${esc(link.type)}${link.folder ? ' · ' + esc(link.folder) : ''}${isPlaceholder ? ' · ⚠️ URL not set' : ''}</div>
+            </div>
+          </a>`;
+      }).join('')}
+    `).join('');
+  }
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  return { init };
+})();
+</script>
+
+</body>
+</html>

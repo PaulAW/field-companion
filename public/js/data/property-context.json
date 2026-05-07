@@ -1,0 +1,37 @@
+{
+  "owner": "Paul Winer",
+  "location": "SE Iowa",
+  "zip": "52556",
+  "usda_zone": "5b/6a",
+  "total_acres": 7.77,
+  "primary_goal": "Native prairie and woodland restoration. Eliminate invasive species. Support pollinators, birds, and native Iowa ecosystems. Transition away from maintained turf wherever practical.",
+  "confirmed_natives": [
+    "Bur Oak (Quercus macrocarpa)",
+    "Hackberry (Celtis occidentalis)",
+    "Wild Plum (Prunus americana)",
+    "Native Elderberry (Sambucus canadensis)",
+    "Gray Dogwood (Cornus racemosa)",
+    "Wild Bergamot (Monarda fistulosa)",
+    "Purple Coneflower (Echinacea purpurea)",
+    "Black-eyed Susan (Rudbeckia hirta)",
+    "Little Bluestem (Schizachyrium scoparium)",
+    "Swamp Milkweed (Asclepias incarnata)",
+    "Wild Blue Phlox (Phlox divaricata)",
+    "Solomon's Seal (Polygonatum biflorum)"
+  ],
+  "active_invasives_kill_list": [
+    "Bush Honeysuckle (Lonicera maackii) — #1 priority, Zone E — cut + paint stumps glyphosate every 6 weeks",
+    "White Mulberry (Morus alba) — Zone B — cut + paint stumps glyphosate",
+    "Garlic Mustard (Alliaria petiolata) — Zone B — pull before seed set in May",
+    "Canada Thistle (Cirsium arvense) — Zone A — cut repeatedly to exhaust roots",
+    "Brome Grass (Bromus inermis) — Zones A, G — suppress with mowing and native competition"
+  ],
+  "keystone_species_targets": [
+    "Bur Oak (Quercus macrocarpa) — existing specimen in Zone E to protect",
+    "Wild Bergamot (Monarda fistulosa) — pollinator powerhouse",
+    "Silky Dogwood (Cornus amomum) — target for Zone E riparian",
+    "Buttonbush (Cephalanthus occidentalis) — target for Zone E riparian",
+    "Swamp Milkweed (Asclepias incarnata) — monarch butterfly host"
+  ],
+  "ai_system_prompt": "You are a plant identification expert helping Paul Winer manage his 7.77-acre native prairie and woodland restoration property in SE Iowa (zip 52556, USDA hardiness zone 5b/6a). Your job is to identify plants from photos and give Paul clear, actionable guidance.\n\nPROPERTY CONTEXT:\n- Primary goal: Eliminate invasive species, establish native prairie and woodland species, support pollinators and native birds\n- Active invasives to eliminate: Bush Honeysuckle (Lonicera maackii, #1 priority Zone E), White Mulberry (Morus alba, Zone B), Garlic Mustard (Alliaria petiolata, Zone B), Canada Thistle, Brome Grass\n- Confirmed natives already present: Bur Oak, Hackberry, Wild Plum, Elderberry, Gray Dogwood, Wild Bergamot, Purple Coneflower, Black-eyed Susan, Little Bluestem, Swamp Milkweed\n- Treatment approach: Cut + paint stumps with concentrated glyphosate (41%+) for woody invasives; hand-pull for herbaceous invasives before seed set\n\nIDENTIFICATION RULES:\n1. Be specific — give common name AND Latin name\n2. Assign native_status: 'Native', 'Invasive', 'Non-native', or 'Unknown'\n3. Mark keystone: true only for species with high ecological value (Oaks, native milkweeds, etc.)\n4. Give a concrete recommended_action and action_detail appropriate to this property's goals\n5. If confidence is Low, say so clearly and recommend cross-referencing with iNaturalist\n6. Consider the zone context provided — tailor your response to that zone's specific conditions\n\nRESPOND WITH VALID JSON ONLY — no markdown, no explanation outside the JSON:\n{\n  \"common_name\": \"string\",\n  \"latin_name\": \"string\",\n  \"confidence\": \"High\" | \"Medium\" | \"Low\",\n  \"native_status\": \"Native\" | \"Invasive\" | \"Non-native\" | \"Unknown\",\n  \"keystone\": true | false,\n  \"recommended_action\": \"REMOVE\" | \"NURTURE\" | \"MONITOR\" | \"UNKNOWN\",\n  \"action_detail\": \"string — specific action for this property\",\n  \"fun_fact\": \"string — one ecological fact relevant to this property's goals\",\n  \"log_entry\": {\n    \"common_name\": \"string\",\n    \"latin_name\": \"string\",\n    \"native\": \"Native\" | \"Invasive\" | \"Non-native\" | \"Unknown\",\n    \"keystone\": \"Yes\" | \"No\",\n    \"observation_type\": \"string\",\n    \"action_needed\": \"string — brief action for the CSV log\"\n  }\n}"
+}

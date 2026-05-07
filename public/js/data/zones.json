@@ -1,0 +1,159 @@
+[
+  {
+    "id": "A",
+    "name": "Highway Border",
+    "acres": 0.92,
+    "elevation": "770–780 ft",
+    "urgency": "low",
+    "priority_action": null,
+    "description": "Strip along highway frontage. Primarily mowed turf with scattered volunteer trees.",
+    "goals": "Establish native wildflower and grass buffer. Reduce mowing frequency over time.",
+    "invasives": [
+      "Canada Thistle (Cirsium arvense)",
+      "Brome Grass (Bromus inermis)"
+    ],
+    "target_natives": [
+      "Little Bluestem (Schizachyrium scoparium)",
+      "Black-eyed Susan (Rudbeckia hirta)",
+      "Purple Coneflower (Echinacea purpurea)",
+      "Wild Bergamot (Monarda fistulosa)"
+    ],
+    "notes": "Check local mowing ordinances before reducing mow frequency. Highway ROW may be county-maintained — confirm property boundaries."
+  },
+  {
+    "id": "B",
+    "name": "Berm Woodland",
+    "acres": 1.62,
+    "elevation": "760–775 ft",
+    "urgency": "high",
+    "priority_action": "URGENT: Remove all white mulberry. Cut and immediately treat stumps with concentrated glyphosate. Repeat every 6 weeks through growing season.",
+    "description": "Raised berm with mixed woodland. Significant white mulberry invasion threatening native understory.",
+    "goals": "Native woodland restoration. Favor bur oak, hackberry, and native understory shrubs. Eliminate mulberry and garlic mustard.",
+    "invasives": [
+      "White Mulberry (Morus alba)",
+      "Bush Honeysuckle (Lonicera maackii)",
+      "Garlic Mustard (Alliaria petiolata)"
+    ],
+    "target_natives": [
+      "Bur Oak (Quercus macrocarpa)",
+      "Hackberry (Celtis occidentalis)",
+      "Wild Plum (Prunus americana)",
+      "Gray Dogwood (Cornus racemosa)",
+      "Native Elderberry (Sambucus canadensis)"
+    ],
+    "notes": "Mulberry spreads aggressively via bird droppings — remove all fruiting trees first. Scout for garlic mustard in spring and treat before seed set. It spreads by the thousands once established."
+  },
+  {
+    "id": "C",
+    "name": "Plateau / Fire Pit",
+    "acres": 0.55,
+    "elevation": "775–785 ft",
+    "urgency": "low",
+    "priority_action": null,
+    "description": "Higher plateau area with fire pit. Mixed use area with some native plantings.",
+    "goals": "Maintain as relaxed native prairie/savanna mix. Low maintenance once established.",
+    "invasives": [
+      "Brome Grass (Bromus inermis)"
+    ],
+    "target_natives": [
+      "Side-oats Grama (Bouteloua curtipendula)",
+      "Wild Bergamot (Monarda fistulosa)",
+      "Compass Plant (Silphium laciniatum)",
+      "Prairie Dropseed (Sporobolus heterolepis)"
+    ],
+    "notes": "Keep fire pit area clear 10-foot radius. Native grasses thrive here; prescribed burns would benefit this zone long-term. Good location for fall seeding."
+  },
+  {
+    "id": "D",
+    "name": "Home / Drive / Pool",
+    "acres": 2.93,
+    "elevation": "768–778 ft",
+    "urgency": "low",
+    "priority_action": null,
+    "description": "Maintained home grounds including driveway, pool area, and ornamental plantings. Managed turf lawn.",
+    "goals": "Maintain existing ornamentals. Monitor blue spruces for disease. Gradually replace turf with native groundcovers where practical.",
+    "invasives": [
+      "Creeping Charlie (Glechoma hederacea)"
+    ],
+    "target_natives": [
+      "Wild Ginger (Asarum canadense)",
+      "Wild Columbine (Aquilegia canadensis)",
+      "Prairie Smoke (Geum triflorum)"
+    ],
+    "notes": "Blue spruce trees present — monitor for Rhizosphaera needle cast. Treat with Daconil when new growth reaches 1–2 inches in spring. Second application may be needed if pressure is high."
+  },
+  {
+    "id": "E",
+    "name": "Creekside",
+    "acres": 1.38,
+    "elevation": "747–766 ft",
+    "urgency": "high",
+    "priority_action": "#1 PRIORITY: Cut ALL bush honeysuckle and paint stumps with concentrated glyphosate every 6 weeks through the growing season. It regrows vigorously — do not skip cycles.",
+    "description": "Creek corridor running west to east. Wet-tolerant species zone. Young bur oak present in NW corner — protect it. Bush honeysuckle is the #1 threat.",
+    "goals": "Eliminate bush honeysuckle entirely. Establish wet-tolerant native riparian corridor. Protect and nurture the young bur oak in NW corner.",
+    "invasives": [
+      "Bush Honeysuckle (Lonicera maackii)"
+    ],
+    "target_natives": [
+      "Silky Dogwood (Cornus amomum)",
+      "Buttonbush (Cephalanthus occidentalis)",
+      "Swamp Milkweed (Asclepias incarnata)",
+      "Joe-Pye Weed (Eutrochium purpureum)",
+      "Native Willows (Salix spp.)",
+      "Blue Wild Indigo (Baptisia australis)"
+    ],
+    "notes": "Young bur oak in NW corner — FLAG IT and protect from deer browse. Creek slope runs west to east. Honeysuckle leafs out 2–3 weeks before native plants — easiest to spot and treat in early spring before natives green up."
+  },
+  {
+    "id": "F",
+    "name": "Island",
+    "acres": 0.12,
+    "elevation": "760–765 ft",
+    "urgency": "low",
+    "priority_action": null,
+    "description": "Small isolated planting area. Contains established lilacs. Low maintenance zone.",
+    "goals": "Maintain lilacs. Add shade-tolerant native companions that won't compete aggressively.",
+    "invasives": [],
+    "target_natives": [
+      "Wild Blue Phlox (Phlox divaricata)",
+      "Solomon's Seal (Polygonatum biflorum)"
+    ],
+    "notes": "Prune lilacs in spring immediately after bloom — OK through early summer. NEVER prune in September or fall — this removes next year's flower buds. Lilacs bloom on old wood."
+  },
+  {
+    "id": "G",
+    "name": "NE Seed Plot",
+    "acres": 0.15,
+    "elevation": "772–778 ft",
+    "urgency": "high",
+    "priority_action": "URGENT: Mow/clear edges to reduce turf and brome grass competition. Hand-weed around seedlings. Do not let weeds shade out the establishing prairie plants.",
+    "description": "Northeast native seed establishment plot. Seedlings competing with turf and brome grass infiltrating from edges.",
+    "goals": "Establish native seed plot successfully. Suppress turf competition. Protect emerging native seedlings through their critical first 1–2 years.",
+    "invasives": [
+      "Brome Grass (Bromus inermis)",
+      "Turf Grass (encroaching into native planting)"
+    ],
+    "target_natives": [
+      "Prairie seed mix as planted — document what germinates"
+    ],
+    "notes": "Native prairie seedlings may look like weeds in years 1–2 — most energy goes to root development above-ground growth is minimal. Be very cautious before pulling anything. Mowing to 4–6 inches in summer suppresses weeds without harming prairie plants. Do not use herbicide near seedlings."
+  },
+  {
+    "id": "H",
+    "name": "Perennial Plot",
+    "acres": 0.01,
+    "elevation": "770–772 ft",
+    "urgency": "low",
+    "priority_action": null,
+    "description": "Small dedicated perennial bed. Managed ornamental and native mix.",
+    "goals": "Maintain as tended perennial bed. Favor native perennials where possible. Good place to trial species before planting larger areas.",
+    "invasives": [],
+    "target_natives": [
+      "Purple Coneflower (Echinacea purpurea)",
+      "Black-eyed Susan (Rudbeckia hirta)",
+      "Blazing Star (Liatris spicata)",
+      "Native Bee Balm (Monarda spp.)"
+    ],
+    "notes": "Small enough to maintain entirely by hand. Divide overcrowded perennials in spring or fall. Deadhead through summer to extend bloom; leave seedheads standing in fall for birds."
+  }
+]

@@ -1,0 +1,70 @@
+{
+  "sections": [
+    {
+      "title": "Landscaping documents",
+      "links": [
+        {
+          "name": "Field Observation Log",
+          "type": "Google Sheets",
+          "folder": "Landscaping folder",
+          "icon": "📊",
+          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+        },
+        {
+          "name": "Zone Status Tracker",
+          "type": "Google Sheets",
+          "folder": "Landscaping folder",
+          "icon": "📊",
+          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+        },
+        {
+          "name": "Property Master Reference",
+          "type": "Google Docs",
+          "folder": "Landscaping folder",
+          "icon": "📄",
+          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+        },
+        {
+          "name": "Seed Inventory – Vegetables",
+          "type": "Google Sheets",
+          "folder": "Landscaping folder",
+          "icon": "📊",
+          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+        },
+        {
+          "name": "Open Landscaping folder",
+          "type": "Google Drive",
+          "folder": "",
+          "icon": "📁",
+          "url": "PASTE_YOUR_GOOGLE_DRIVE_FOLDER_LINK_HERE"
+        }
+      ]
+    },
+    {
+      "title": "Native plant references",
+      "links": [
+        {
+          "name": "Native Plants on Property (Photos)",
+          "type": "Excel",
+          "folder": "",
+          "icon": "📊",
+          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+        },
+        {
+          "name": "All Plants – Alphabetical + Status",
+          "type": "PDF",
+          "folder": "",
+          "icon": "📄",
+          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+        },
+        {
+          "name": "Keystone Natives (zip 52556)",
+          "type": "PDF",
+          "folder": "",
+          "icon": "📄",
+          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+        }
+      ]
+    }
+  ]
+}

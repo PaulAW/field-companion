@@ -1,0 +1,70 @@
+{
+  "seasons": [
+    {
+      "id": "spring",
+      "label": "Spring",
+      "emoji": "🌱",
+      "months": "Apr–May",
+      "monthRange": [4, 5],
+      "tasks": [
+        { "id": "sp-01", "text": "Scout Zone E — bush honeysuckle leafs out BEFORE natives; treat now while easy to spot", "zone": "E", "urgent": true },
+        { "id": "sp-02", "text": "Cut and stump-treat honeysuckle (Zone E) and mulberry (Zone B) before full leaf-out", "zone": "B,E", "urgent": true },
+        { "id": "sp-03", "text": "Mow/clear Zone G edges to reduce turf competition around seedlings", "zone": "G", "urgent": true },
+        { "id": "sp-04", "text": "Scout Zone B for garlic mustard — treat before it goes to seed (May critical)", "zone": "B", "urgent": true },
+        { "id": "sp-05", "text": "Treat blue spruces (Zone D) for Rhizosphaera when new growth is 1–2 inches (Daconil)", "zone": "D", "urgent": false },
+        { "id": "sp-06", "text": "Prune Island lilacs (Zone F) after bloom — spring OK, avoid September", "zone": "F", "urgent": false },
+        { "id": "sp-07", "text": "Flag and protect the young bur oak in Zone E NW corner", "zone": "E", "urgent": false },
+        { "id": "sp-08", "text": "Order summer plants for Zone E riparian natives (silky dogwood, buttonbush, swamp milkweed)", "zone": "E", "urgent": false },
+        { "id": "sp-09", "text": "Update Field Observation Log with any winter damage or new observations", "zone": null, "urgent": false }
+      ]
+    },
+    {
+      "id": "summer",
+      "label": "Summer",
+      "emoji": "☀️",
+      "months": "Jun–Aug",
+      "monthRange": [6, 8],
+      "tasks": [
+        { "id": "su-01", "text": "Re-treat honeysuckle regrowth in Zone E — cut and paint stumps every 6 weeks all season", "zone": "E", "urgent": true },
+        { "id": "su-02", "text": "Re-treat mulberry sprouts in Zone B — cut at ground level and paint stumps", "zone": "B", "urgent": true },
+        { "id": "su-03", "text": "Mow Zone G to 4–6 inches — suppresses weeds without harming prairie seedlings", "zone": "G", "urgent": false },
+        { "id": "su-04", "text": "Plant riparian natives in Zone E along creek bank", "zone": "E", "urgent": false },
+        { "id": "su-05", "text": "Second Daconil spray on blue spruces if Rhizosphaera pressure remains high", "zone": "D", "urgent": false },
+        { "id": "su-06", "text": "Identify and photograph any unknown plants across the property", "zone": null, "urgent": false },
+        { "id": "su-07", "text": "Document Zone G seedling progress — photograph and log observed species", "zone": "G", "urgent": false },
+        { "id": "su-08", "text": "Collect seed from desirable native wildflowers for fall broadcast seeding", "zone": null, "urgent": false }
+      ]
+    },
+    {
+      "id": "fall",
+      "label": "Fall",
+      "emoji": "🍂",
+      "months": "Sep–Nov",
+      "monthRange": [9, 11],
+      "tasks": [
+        { "id": "fa-01", "text": "Final honeysuckle treatment before hard freeze — glyphosate most effective in fall", "zone": "E", "urgent": true },
+        { "id": "fa-02", "text": "Broadcast native seed on Zone G and disturbed areas in Zone A", "zone": "A,G", "urgent": false },
+        { "id": "fa-03", "text": "Do NOT prune lilacs (Zone F) — fall pruning removes next year's flower buds", "zone": "F", "urgent": false },
+        { "id": "fa-04", "text": "Leave seedheads standing on all native plants — winter bird food and natural reseeding", "zone": null, "urgent": false },
+        { "id": "fa-05", "text": "Stake and mark problem invasive areas for priority spring treatment", "zone": null, "urgent": false },
+        { "id": "fa-06", "text": "Update Zone Status Tracker Google Sheet with end-of-season progress", "zone": null, "urgent": false },
+        { "id": "fa-07", "text": "Plant balled-and-burlapped natives if available — fall is ideal for establishment", "zone": null, "urgent": false }
+      ]
+    },
+    {
+      "id": "winter",
+      "label": "Winter",
+      "emoji": "❄️",
+      "months": "Dec–Mar",
+      "monthRange": [12, 3],
+      "tasks": [
+        { "id": "wi-01", "text": "Order seeds and plants for next season from reputable Iowa native nurseries", "zone": null, "urgent": false },
+        { "id": "wi-02", "text": "Review Field Observation Log — assess what changed, update zone restoration goals", "zone": null, "urgent": false },
+        { "id": "wi-03", "text": "Plan spring invasive treatment schedule — prioritize Zone E and Zone B", "zone": "B,E", "urgent": false },
+        { "id": "wi-04", "text": "Research keystone native species appropriate for each zone", "zone": null, "urgent": false },
+        { "id": "wi-05", "text": "Sharpen and maintain tools: loppers, pruners, brush saw, backpack sprayer", "zone": null, "urgent": false },
+        { "id": "wi-06", "text": "Stock up on Daconil and concentrated glyphosate before spring rush", "zone": null, "urgent": false }
+      ]
+    }
+  ]
+}
