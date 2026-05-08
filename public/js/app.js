@@ -27,6 +27,7 @@ const App = (() => {
   function getDB() { return _db; }
 
   function saveObservation(obs) {
+    if (!_db) return Promise.reject(new Error('Database not ready'));
     return new Promise((resolve, reject) => {
       const tx = _db.transaction('observations', 'readwrite');
       const req = tx.objectStore('observations').add({ ...obs, created_at: Date.now() });
@@ -36,6 +37,7 @@ const App = (() => {
   }
 
   function getAllObservations() {
+    if (!_db) return Promise.resolve([]);
     return new Promise((resolve, reject) => {
       const tx = _db.transaction('observations', 'readonly');
       const req = tx.objectStore('observations').getAll();
@@ -45,6 +47,7 @@ const App = (() => {
   }
 
   function getObservationsByZone(zone) {
+    if (!_db) return Promise.resolve([]);
     return new Promise((resolve, reject) => {
       const tx = _db.transaction('observations', 'readonly');
       const idx = tx.objectStore('observations').index('zone');
@@ -55,6 +58,7 @@ const App = (() => {
   }
 
   function deleteObservation(id) {
+    if (!_db) return Promise.reject(new Error('Database not ready'));
     return new Promise((resolve, reject) => {
       const tx = _db.transaction('observations', 'readwrite');
       const req = tx.objectStore('observations').delete(id);
@@ -247,10 +251,13 @@ const App = (() => {
 
   /* ── Init ── */
   async function init() {
+    // DB init runs in background — don't block UI on IndexedDB (can hang on iOS Safari)
+    initDB().catch(err => console.warn('IndexedDB unavailable:', err));
+
     try {
-      await Promise.all([initDB(), loadAllData()]);
+      await loadAllData();
     } catch (err) {
-      console.error('App init error:', err);
+      console.error('App data load error:', err);
     }
 
     window.addEventListener('online',  updateOnlineStatus);
