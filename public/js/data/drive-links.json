@@ -8,35 +8,28 @@
           "type": "Google Sheets",
           "folder": "Landscaping folder",
           "icon": "📊",
-          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+          "url": "https://docs.google.com/spreadsheets/d/1zZJCv1IQzdkyTUqpmg4KEZy860BPLXLdfEzv7J91bis/edit?usp=drive_link"
         },
         {
           "name": "Zone Status Tracker",
           "type": "Google Sheets",
           "folder": "Landscaping folder",
           "icon": "📊",
-          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+          "url": "https://docs.google.com/spreadsheets/d/1qSOxvK7_zH9o_ONUJzIu0KOGg8mBpQZMCe0x-jWs9kM/edit?usp=drive_link"
         },
         {
           "name": "Property Master Reference",
           "type": "Google Docs",
           "folder": "Landscaping folder",
           "icon": "📄",
-          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+          "url": "https://docs.google.com/document/d/1A6nB9CSnvDiHupsAD_89zzFzZ3Y7W0fYu5Cj1ygKgLc/edit?usp=drive_link"
         },
         {
           "name": "Seed Inventory – Vegetables",
           "type": "Google Sheets",
           "folder": "Landscaping folder",
           "icon": "📊",
-          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
-        },
-        {
-          "name": "Open Landscaping folder",
-          "type": "Google Drive",
-          "folder": "",
-          "icon": "📁",
-          "url": "PASTE_YOUR_GOOGLE_DRIVE_FOLDER_LINK_HERE"
+          "url": "https://docs.google.com/spreadsheets/d/1TFx_RodyFOaVNrxKDR2p_nnjRgasmyYLJtpCeGdnM6E/edit?usp=drive_link"
         }
       ]
     },
@@ -46,23 +39,23 @@
         {
           "name": "Native Plants on Property (Photos)",
           "type": "Excel",
-          "folder": "",
+          "folder": "Landscaping folder",
           "icon": "📊",
-          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+          "url": "https://docs.google.com/spreadsheets/d/19q5bwtKcvZ72yONlB7ymZDPe_Rzb7tr1/edit?usp=drive_link&ouid=107115648662419407844&rtpof=true&sd=true"
         },
         {
-          "name": "All Plants – Alphabetical + Status",
+          "name": "Plants – Alphabetical + Status",
           "type": "PDF",
-          "folder": "",
+          "folder": "Landscaping folder",
           "icon": "📄",
-          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+          "url": "https://drive.google.com/file/d/1T_swDtdRn2N0MbgeVQmTr75Pg3n85kjt/view?usp=drive_link"
         },
         {
           "name": "Keystone Natives (zip 52556)",
           "type": "PDF",
-          "folder": "",
+          "folder": "Landscaping folder",
           "icon": "📄",
-          "url": "PASTE_YOUR_GOOGLE_DRIVE_LINK_HERE"
+          "url": "https://drive.google.com/file/d/1Rpoixlq3YXlWrbQSpWaaMdkDj7piF7dw/view?usp=drive_link"
         }
       ]
     }
