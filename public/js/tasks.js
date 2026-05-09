@@ -1,6 +1,6 @@
-﻿/* tasks.js â€” Seasonal maintenance checklist with localStorage persistence */
+/* tasks.js — Seasonal maintenance checklist with localStorage persistence */
 
-const Tasks = (() => {
+var Tasks = (() => {
   const STORAGE_KEY = 'fc_tasks';
   let _state = {};   // { 'sp-01': true, ... }
 
@@ -16,7 +16,7 @@ const Tasks = (() => {
     render();
   }
 
-  /* â”€â”€ State persistence â”€â”€ */
+  /* ── State persistence ── */
   function loadState() {
     try {
       _state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
@@ -37,7 +37,7 @@ const Tasks = (() => {
     saveState();
   }
 
-  /* â”€â”€ Current season detection â”€â”€ */
+  /* ── Current season detection ── */
   function currentSeasonId() {
     const month = new Date().getMonth() + 1;
     if (month >= 4 && month <= 5) return 'spring';
@@ -46,7 +46,7 @@ const Tasks = (() => {
     return 'winter';
   }
 
-  /* â”€â”€ Render â”€â”€ */
+  /* ── Render ── */
   function render() {
     const container = $('tasks-container');
     if (!container) return;
@@ -114,7 +114,7 @@ const Tasks = (() => {
           </div>
           <div style="display:flex;align-items:center;gap:8px">
             <span class="season-progress">${done}/${total}</span>
-            <span class="season-chevron">â–¶</span>
+            <span class="season-chevron">▶</span>
           </div>
         </div>
         <div class="progress-bar" style="${isOpen ? '' : 'display:none'}" id="season-prog-${season.id}">
@@ -136,7 +136,7 @@ const Tasks = (() => {
         <div class="task-check ${done ? 'done' : ''}"></div>
         <div class="task-text ${done ? 'done' : ''} ${task.urgent && !done ? 'task-urgent' : ''}">
           ${esc(task.text)}
-          ${task.zone ? `<span style="color:var(--muted);font-size:10px"> Â· Zone ${esc(task.zone)}</span>` : ''}
+          ${task.zone ? `<span style="color:var(--muted);font-size:10px"> · Zone ${esc(task.zone)}</span>` : ''}
         </div>
       </div>`;
   }
@@ -179,4 +179,3 @@ const Tasks = (() => {
 
   return { init };
 })();
-
