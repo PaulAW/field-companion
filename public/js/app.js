@@ -1,6 +1,6 @@
 /* app.js — Field Companion core: routing, data loading, IndexedDB, toast, offline */
 
-const APP_BUILD = '2026-05-08-d';   // bump this letter each deploy for version tracking
+const APP_BUILD = '2026-05-08-e';   // bump this letter each deploy for version tracking
 
 const App = (() => {
   let _zones = [];
@@ -253,16 +253,13 @@ const App = (() => {
 
   /* ── Init ── */
   async function init() {
-    console.log('[FC] init start — build', APP_BUILD);
-
     // DB init runs in background — don't block UI on IndexedDB (can hang on mobile)
-    initDB().catch(err => console.warn('[FC] IndexedDB unavailable:', err));
+    initDB().catch(err => console.warn('Field Companion: IndexedDB unavailable:', err));
 
     try {
       await loadAllData();
-      console.log('[FC] data loaded — zones:', _zones.length, 'tasks seasons:', (_tasks.seasons||[]).length);
     } catch (err) {
-      console.error('[FC] data load error:', err);
+      console.error('Field Companion: data load error:', err);
     }
 
     window.addEventListener('online',  updateOnlineStatus);
@@ -273,11 +270,11 @@ const App = (() => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
-    try { setupSettings(); console.log('[FC] settings OK'); }
-    catch (e) { console.error('[FC] setupSettings failed:', e); }
+    try { setupSettings(); }
+    catch (e) { console.error('Field Companion: setupSettings failed:', e); }
 
     try { registerSW(); }
-    catch (e) { console.error('[FC] registerSW failed:', e); }
+    catch (e) { console.error('Field Companion: registerSW failed:', e); }
 
     const mods = [
       ['PlantID', window.PlantID],
@@ -288,10 +285,8 @@ const App = (() => {
     ];
     for (const [name, mod] of mods) {
       if (mod) {
-        try { mod.init(); console.log('[FC]', name, 'init OK'); }
-        catch (e) { console.error('[FC]', name, 'init failed:', e); }
-      } else {
-        console.warn('[FC]', name, 'module not found');
+        try { mod.init(); }
+        catch (e) { console.error('Field Companion:', name, 'init failed:', e); }
       }
     }
 
@@ -299,7 +294,6 @@ const App = (() => {
     if (buildEl) buildEl.textContent = APP_BUILD;
 
     switchTab('plant-id');
-    console.log('[FC] init complete');
   }
 
   return {
