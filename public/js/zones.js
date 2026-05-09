@@ -1,4 +1,4 @@
-/* zones.js — Zone grid and zone detail view */
+﻿/* zones.js â€” Zone grid and zone detail view */
 
 const Zones = (() => {
   let _showingDetail = false;
@@ -13,7 +13,7 @@ const Zones = (() => {
     if (!_showingDetail) renderGrid();
   }
 
-  /* ── Grid ── */
+  /* â”€â”€ Grid â”€â”€ */
   function renderGrid() {
     _showingDetail = false;
     const container = $('zones-container');
@@ -38,13 +38,13 @@ const Zones = (() => {
       : '';
     return `
       <div class="zone-card ${urgent ? 'urgent' : ''}">
-        <div class="zn">Zone ${esc(z.id)}${urgent ? ' ⚠️' : ''}</div>
-        <div class="zd">${esc(z.name)} · ${z.acres} ac</div>
+        <div class="zn">Zone ${esc(z.id)}${urgent ? ' âš ï¸' : ''}</div>
+        <div class="zd">${esc(z.name)} Â· ${z.acres} ac</div>
         ${urgent && issue ? `<div class="zp">${esc(issue.substring(0, 60))}</div>` : ''}
       </div>`;
   }
 
-  /* ── Detail ── */
+  /* â”€â”€ Detail â”€â”€ */
   function renderDetail(zone) {
     _showingDetail = true;
     const container = $('zones-container');
@@ -59,10 +59,10 @@ const Zones = (() => {
     const targetsList = zone.target_natives.map(s => `<li>${esc(s)}</li>`).join('');
 
     container.innerHTML = `
-      <button class="zone-detail-back" id="zone-back-btn">← All zones</button>
+      <button class="zone-detail-back" id="zone-back-btn">â† All zones</button>
       <div class="result-card">
-        <div class="result-name">Zone ${esc(zone.id)} — ${esc(zone.name)}</div>
-        <div class="result-latin">${zone.acres} acres · ${esc(zone.elevation)}</div>
+        <div class="result-name">Zone ${esc(zone.id)} â€” ${esc(zone.name)}</div>
+        <div class="result-latin">${zone.acres} acres Â· ${esc(zone.elevation)}</div>
 
         ${zone.priority_action ? `
           <div class="zone-detail-section">
@@ -106,3 +106,4 @@ const Zones = (() => {
 
   return { init };
 })();
+

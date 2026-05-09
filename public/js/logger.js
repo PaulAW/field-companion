@@ -1,6 +1,6 @@
 /* logger.js — Manual observation entry, history view, CSV export */
 
-const Logger = (() => {
+var Logger = (() => {
   let _mode = 'new';   // 'new' | 'history' | 'export'
   let _gpsCoords = null;
   let _observations = [];

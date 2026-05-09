@@ -1,6 +1,6 @@
 /* plant-id.js — Camera capture, Claude API call, result display */
 
-const PlantID = (() => {
+var PlantID = (() => {
   let _photoBase64 = null;
   let _photoType   = 'image/jpeg';
   let _gpsCoords   = null;
