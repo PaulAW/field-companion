@@ -1,5 +1,7 @@
 /* app.js — Field Companion core: routing, data loading, IndexedDB, toast, offline */
 
+const APP_BUILD = '2026-05-08-b';   // bump this letter each deploy for version tracking
+
 const App = (() => {
   let _zones = [];
   let _tasks = {};
@@ -251,13 +253,16 @@ const App = (() => {
 
   /* ── Init ── */
   async function init() {
-    // DB init runs in background — don't block UI on IndexedDB (can hang on iOS Safari)
-    initDB().catch(err => console.warn('IndexedDB unavailable:', err));
+    console.log('[FC] init start — build', APP_BUILD);
+
+    // DB init runs in background — don't block UI on IndexedDB (can hang on mobile)
+    initDB().catch(err => console.warn('[FC] IndexedDB unavailable:', err));
 
     try {
       await loadAllData();
+      console.log('[FC] data loaded — zones:', _zones.length, 'tasks seasons:', (_tasks.seasons||[]).length);
     } catch (err) {
-      console.error('App data load error:', err);
+      console.error('[FC] data load error:', err);
     }
 
     window.addEventListener('online',  updateOnlineStatus);
@@ -268,16 +273,33 @@ const App = (() => {
       btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
-    setupSettings();
-    registerSW();
+    try { setupSettings(); console.log('[FC] settings OK'); }
+    catch (e) { console.error('[FC] setupSettings failed:', e); }
 
-    if (window.PlantID) PlantID.init();
-    if (window.Logger)  Logger.init();
-    if (window.Zones)   Zones.init();
-    if (window.Tasks)   Tasks.init();
-    if (window.Drive)   Drive.init();
+    try { registerSW(); }
+    catch (e) { console.error('[FC] registerSW failed:', e); }
+
+    const mods = [
+      ['PlantID', window.PlantID],
+      ['Logger',  window.Logger],
+      ['Zones',   window.Zones],
+      ['Tasks',   window.Tasks],
+      ['Drive',   window.Drive],
+    ];
+    for (const [name, mod] of mods) {
+      if (mod) {
+        try { mod.init(); console.log('[FC]', name, 'init OK'); }
+        catch (e) { console.error('[FC]', name, 'init failed:', e); }
+      } else {
+        console.warn('[FC]', name, 'module not found');
+      }
+    }
+
+    const buildEl = document.getElementById('app-build');
+    if (buildEl) buildEl.textContent = APP_BUILD;
 
     switchTab('plant-id');
+    console.log('[FC] init complete');
   }
 
   return {
