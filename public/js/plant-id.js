@@ -155,7 +155,13 @@ var PlantID = (() => {
       showResult(result, zone, notes);
     } catch (err) {
       showSpinner(false);
-      showError(err.message || 'Identification failed. Check your API key and connection.');
+      let msg = err.message || 'Identification failed.';
+      if (msg.toLowerCase().includes('fetch') || msg.toLowerCase().includes('network')) {
+        msg = 'Network request blocked or failed. ' +
+              'If using Brave, tap the lion icon in the address bar and turn Shields OFF for this site, then try again. ' +
+              'Also check that your API key is entered in Settings.';
+      }
+      showError(msg);
     }
   }
 
