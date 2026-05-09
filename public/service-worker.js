@@ -1,10 +1,11 @@
 /* service-worker.js — Offline-first cache for Field Companion */
 
-const CACHE_NAME = 'field-companion-v2';
+const CACHE_NAME = 'field-companion-v3';
 
 const SHELL_FILES = [
   './',
   './index.html',
+  './manifest.json',
   './css/style.css',
   './js/app.js',
   './js/plant-id.js',
@@ -15,6 +16,8 @@ const SHELL_FILES = [
   './js/data/tasks.json',
   './js/data/drive-links.json',
   './js/data/property-context.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
 ];
 
 /* Cache all shell files on install */
