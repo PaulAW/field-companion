@@ -54,28 +54,50 @@ var PlantID = (() => {
     populateZoneSelect();
   }
 
+  /* ── Image compression ── */
+  function compressImage(dataUrl, maxPx, quality) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if (w > maxPx || h > maxPx) {
+          if (w > h) { h = Math.round(h * maxPx / w); w = maxPx; }
+          else        { w = Math.round(w * maxPx / h); h = maxPx; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = dataUrl;
+    });
+  }
+
   /* ── Photo input ── */
   function setupPhotoInput() {
-    const input = $('pid-photo-input');
-    const preview = $('pid-photo-preview');
-    const uploadBox = $('pid-upload-box');
-    if (!input) return;
+    const preview  = $('pid-photo-preview');
+    const hint     = $('pid-upload-hint');
 
-    input.addEventListener('change', e => {
+    async function handleFile(e) {
       const file = e.target.files[0];
       if (!file) return;
-      _photoType = file.type || 'image/jpeg';
       const reader = new FileReader();
-      reader.onload = ev => {
-        const dataUrl = ev.target.result;
-        _photoBase64 = dataUrl.split(',')[1];
-        preview.src = dataUrl;
+      reader.onload = async ev => {
+        const compressed = await compressImage(ev.target.result, 1024, 0.85);
+        _photoBase64 = compressed.split(',')[1];
+        _photoType   = 'image/jpeg';
+        preview.src  = compressed;
         preview.style.display = 'block';
-        uploadBox.querySelector('p').textContent = file.name;
+        if (hint) hint.textContent = file.name;
         updateIdentifyBtn();
       };
       reader.readAsDataURL(file);
-    });
+    }
+
+    const cam = $('pid-camera-input');
+    const gal = $('pid-gallery-input');
+    if (cam) cam.addEventListener('change', handleFile);
+    if (gal) gal.addEventListener('change', handleFile);
   }
 
   /* ── GPS ── */
@@ -155,11 +177,17 @@ var PlantID = (() => {
       showResult(result, zone, notes);
     } catch (err) {
       showSpinner(false);
-      let msg = err.message || 'Identification failed.';
-      if (msg.toLowerCase().includes('fetch') || msg.toLowerCase().includes('network')) {
-        msg = 'Network request blocked or failed. ' +
-              'If using Brave, tap the lion icon in the address bar and turn Shields OFF for this site, then try again. ' +
-              'Also check that your API key is entered in Settings.';
+      const raw = err.toString();
+      let msg;
+      if (!err.message || err.name === 'TypeError' || raw.toLowerCase().includes('fetch')) {
+        msg = '⚠️ Network error — the API request was blocked or failed.<br><br>' +
+              'Things to try:<br>' +
+              '1. Check your API key is set in ⚙️ Settings<br>' +
+              '2. In Brave: tap the lion icon → turn Shields OFF for this site<br>' +
+              '3. Check your internet connection<br><br>' +
+              '<small style="color:var(--muted)">Error detail: ' + esc(raw) + '</small>';
+      } else {
+        msg = esc(err.message) + '<br><small style="color:var(--muted)">' + esc(raw) + '</small>';
       }
       showError(msg);
     }
