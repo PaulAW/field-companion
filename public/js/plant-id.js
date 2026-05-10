@@ -233,6 +233,13 @@ var PlantID = (() => {
     const data = await res.json();
     const text = data.content?.[0]?.text || '';
 
+    /* ── DEBUG — remove after testing ── */
+    console.group('🌿 Field Companion — Plant ID debug');
+    console.log('SYSTEM PROMPT:\n', systemPrompt);
+    console.log('USER MESSAGE (text part):\n', userMessage[1].text);
+    console.log('RAW AI RESPONSE:\n', text);
+    console.groupEnd();
+
     let parsed;
     try {
       const jsonMatch = text.match(/\{[\s\S]*\}/);
