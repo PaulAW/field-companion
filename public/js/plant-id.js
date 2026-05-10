@@ -200,18 +200,12 @@ var PlantID = (() => {
 
     let zoneContext = '';
     if (zoneData) {
-      zoneContext = `\n\nZONE ${zoneData.id} — ${zoneData.name} (${zoneData.acres} acres):
-Description: ${zoneData.description}
-Goals: ${zoneData.goals}
-Active invasives: ${zoneData.invasives.join(', ') || 'None confirmed'}
-Target natives: ${zoneData.target_natives.join(', ')}
-Notes: ${zoneData.notes}
-${zoneData.priority_action ? 'Priority action: ' + zoneData.priority_action : ''}`;
+      zoneContext = `\n\nHabitat: Zone ${zoneData.id} — ${zoneData.name} — ${zoneData.description}`;
     }
 
     const userMessage = [
       { type: 'image', source: { type: 'base64', media_type: _photoType, data: _photoBase64 } },
-      { type: 'text', text: `Please identify this plant from my SE Iowa property.${zoneContext ? '\n\nZone context:' + zoneContext : ''}${userNotes ? '\n\nMy notes: ' + userNotes : ''}` }
+      { type: 'text', text: `Identify the plant in this photo from my SE Iowa property. Base your identification entirely on the visual features in the image.${zoneContext}${userNotes ? '\n\nField notes: ' + userNotes : ''}` }
     ];
 
     const res = await fetch('https://field-companion-api.paulwiner5.workers.dev/', {
