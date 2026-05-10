@@ -214,12 +214,11 @@ ${zoneData.priority_action ? 'Priority action: ' + zoneData.priority_action : ''
       { type: 'text', text: `Please identify this plant from my SE Iowa property.${zoneContext ? '\n\nZone context:' + zoneContext : ''}${userNotes ? '\n\nMy notes: ' + userNotes : ''}` }
     ];
 
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('https://field-companion-api.paulwiner5.workers.dev/', {
       method: 'POST',
       headers: {
         'x-api-key': apiKey,
         'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-calls': 'true',
         'content-type': 'application/json',
       },
       body: JSON.stringify({
