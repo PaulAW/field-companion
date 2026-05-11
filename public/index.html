@@ -41,11 +41,7 @@
 
         <!-- Photo upload -->
         <div class="field">
-          <div class="upload-box" id="pid-upload-box">
-            <span class="ico">📷</span>
-            <p id="pid-upload-hint">No photo selected</p>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:8px">
+          <div style="display:flex;gap:8px">
             <label class="btn btn-outline btn-sm" style="flex:1;text-align:center;cursor:pointer">
               📷 Camera
               <input type="file" id="pid-camera-input" accept="image/*" capture="environment" style="display:none">
@@ -55,7 +51,8 @@
               <input type="file" id="pid-gallery-input" accept="image/*" style="display:none">
             </label>
           </div>
-          <img id="pid-photo-preview" class="photo-preview" alt="Selected plant photo">
+          <img id="pid-photo-preview" class="photo-preview" alt="Selected plant photo" style="display:none;margin-top:8px">
+          <p id="pid-upload-hint" style="display:none"></p>
         </div>
 
         <!-- Zone + GPS row -->

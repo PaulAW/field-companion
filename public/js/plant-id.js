@@ -31,8 +31,7 @@ var PlantID = (() => {
         preview.src = 'data:image/jpeg;base64,' + saved;
         preview.style.display = 'block';
       }
-      const hint = $('pid-upload-hint');
-      if (hint) hint.textContent = 'Photo restored ✓';
+      // hint element intentionally hidden in redesigned UI
       updateIdentifyBtn();
     } catch(e) {}
   }
@@ -107,7 +106,6 @@ var PlantID = (() => {
         _photoType   = 'image/jpeg';
         preview.src  = compressed;
         preview.style.display = 'block';
-        if (hint) hint.textContent = file.name;
         /* Persist photo so GPS permission dialog page-lifecycle doesn't wipe it */
         try { sessionStorage.setItem('fc_photo_b64', _photoBase64); } catch(e) {}
         updateIdentifyBtn();
