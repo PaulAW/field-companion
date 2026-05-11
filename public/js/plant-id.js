@@ -195,18 +195,35 @@ var PlantID = (() => {
 
   /* ── Claude API call ── */
   async function callClaudeAPI(apiKey, zoneData, userNotes) {
-    const ctx = App.getPropertyCtx();
-    let systemPrompt = ctx.ai_system_prompt || '';
-
-    let zoneContext = '';
-    if (zoneData) {
-      zoneContext = `\n\nLogged zone: Zone ${zoneData.id} — ${zoneData.name}`;
-    }
+    const location = (_gpsCoords)
+      ? `GPS: ${_gpsCoords.lat}, ${_gpsCoords.lng}`
+      : 'Location: Southeast Iowa';
 
     const userMessage = [
       { type: 'image', source: { type: 'base64', media_type: _photoType, data: _photoBase64 } },
-      { type: 'text', text: `Identify the plant in this photo from my SE Iowa property. Base your identification entirely on the visual features in the image.${zoneContext}${userNotes ? '\n\nField notes: ' + userNotes : ''}` }
+      { type: 'text', text: `${location}\nDate: ${App.todayISO()}` }
     ];
+
+    const systemPrompt =
+`Identify the plant in the photo. Respond with valid JSON only — no markdown, no text outside the JSON:
+{
+  "common_name": "string",
+  "latin_name": "string",
+  "confidence": "High" | "Medium" | "Low",
+  "native_status": "Native" | "Invasive" | "Non-native" | "Unknown",
+  "keystone": true | false,
+  "recommended_action": "REMOVE" | "NURTURE" | "MONITOR" | "UNKNOWN",
+  "action_detail": "string",
+  "fun_fact": "string",
+  "log_entry": {
+    "common_name": "string",
+    "latin_name": "string",
+    "native": "Native" | "Invasive" | "Non-native" | "Unknown",
+    "keystone": "Yes" | "No",
+    "observation_type": "string",
+    "action_needed": "string"
+  }
+}`;
 
     const res = await fetch('https://field-companion-api.paulwiner5.workers.dev/', {
       method: 'POST',
@@ -216,7 +233,7 @@ var PlantID = (() => {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-7',
+        model: 'claude-sonnet-4-5',
         max_tokens: 1000,
         system: systemPrompt,
         messages: [{ role: 'user', content: userMessage }],
@@ -232,13 +249,6 @@ var PlantID = (() => {
 
     const data = await res.json();
     const text = data.content?.[0]?.text || '';
-
-    /* ── DEBUG — remove after testing ── */
-    console.group('🌿 Field Companion — Plant ID debug');
-    console.log('SYSTEM PROMPT:\n', systemPrompt);
-    console.log('USER MESSAGE (text part):\n', userMessage[1].text);
-    console.log('RAW AI RESPONSE:\n', text);
-    console.groupEnd();
 
     let parsed;
     try {
