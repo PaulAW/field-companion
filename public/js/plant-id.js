@@ -16,6 +16,25 @@ var PlantID = (() => {
     setupZoneSelect();
     setupIdentifyBtn();
     renderApiKeyWarning();
+    restorePhotoIfNeeded();
+  }
+
+  /* Restore photo if GPS permission dialog caused a page lifecycle reload */
+  function restorePhotoIfNeeded() {
+    try {
+      const saved = sessionStorage.getItem('fc_photo_b64');
+      if (!saved) return;
+      _photoBase64 = saved;
+      _photoType   = 'image/jpeg';
+      const preview = $('pid-photo-preview');
+      if (preview) {
+        preview.src = 'data:image/jpeg;base64,' + saved;
+        preview.style.display = 'block';
+      }
+      const hint = $('pid-upload-hint');
+      if (hint) hint.textContent = 'Photo restored ✓';
+      updateIdentifyBtn();
+    } catch(e) {}
   }
 
   function onShow() {
@@ -89,6 +108,8 @@ var PlantID = (() => {
         preview.src  = compressed;
         preview.style.display = 'block';
         if (hint) hint.textContent = file.name;
+        /* Persist photo so GPS permission dialog page-lifecycle doesn't wipe it */
+        try { sessionStorage.setItem('fc_photo_b64', _photoBase64); } catch(e) {}
         updateIdentifyBtn();
       };
       reader.readAsDataURL(file);
@@ -154,6 +175,7 @@ var PlantID = (() => {
     _photoType   = 'image/jpeg';
     _gpsCoords   = null;
     _lastResult  = null;
+    try { sessionStorage.removeItem('fc_photo_b64'); } catch(e) {}
 
     const preview = $('pid-photo-preview');
     if (preview) { preview.src = ''; preview.style.display = 'none'; }
