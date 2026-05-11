@@ -148,6 +148,39 @@ var PlantID = (() => {
     btn.disabled = !_photoBase64;
   }
 
+  /* ── Clear / New plant ── */
+  function clearForm() {
+    _photoBase64 = null;
+    _photoType   = 'image/jpeg';
+    _gpsCoords   = null;
+    _lastResult  = null;
+
+    const preview = $('pid-photo-preview');
+    if (preview) { preview.src = ''; preview.style.display = 'none'; }
+
+    const hint = $('pid-upload-hint');
+    if (hint) hint.textContent = 'No photo selected';
+
+    const cam = $('pid-camera-input');
+    const gal = $('pid-gallery-input');
+    if (cam) cam.value = '';
+    if (gal) gal.value = '';
+
+    const gpsStatus = $('pid-gps-status');
+    if (gpsStatus) { gpsStatus.textContent = ''; gpsStatus.className = 'gps-status'; }
+
+    const notes = $('pid-notes');
+    if (notes) notes.value = '';
+
+    hideResult();
+    updateIdentifyBtn();
+
+    // Scroll back to top of Plant ID screen
+    const screen = document.getElementById('screen-plant-id');
+    if (screen) screen.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }
+
   /* ── Main identification flow ── */
   async function runIdentification() {
     if (!_photoBase64) { App.toast('Please select a photo first'); return; }
@@ -335,10 +368,14 @@ var PlantID = (() => {
             <button class="btn btn-sm" id="pid-save-obs">💾 Save observation</button>
           </div>
         </div>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+          <button class="btn btn-outline" id="pid-new-plant" style="width:100%">🔄 New plant</button>
+        </div>
       </div>`;
 
     $('pid-copy-csv').addEventListener('click', () => App.copyToClipboard(csvRow));
     $('pid-save-obs').addEventListener('click', () => saveObservation(result, zone, notes, csvRow));
+    $('pid-new-plant').addEventListener('click', clearForm);
   }
 
   function buildCSVRow(result, zone, notes) {
