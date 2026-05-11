@@ -83,7 +83,7 @@ var PlantID = (() => {
       if (!file) return;
       const reader = new FileReader();
       reader.onload = async ev => {
-        const compressed = await compressImage(ev.target.result, 1024, 0.85);
+        const compressed = await compressImage(ev.target.result, 1600, 0.90);
         _photoBase64 = compressed.split(',')[1];
         _photoType   = 'image/jpeg';
         preview.src  = compressed;
@@ -233,7 +233,7 @@ var PlantID = (() => {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
+        model: 'claude-sonnet-4-6',
         max_tokens: 1000,
         system: systemPrompt,
         messages: [{ role: 'user', content: userMessage }],
