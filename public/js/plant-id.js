@@ -200,7 +200,7 @@ var PlantID = (() => {
 
     let zoneContext = '';
     if (zoneData) {
-      zoneContext = `\n\nHabitat: Zone ${zoneData.id} — ${zoneData.name} — ${zoneData.description}`;
+      zoneContext = `\n\nLogged zone: Zone ${zoneData.id} — ${zoneData.name}`;
     }
 
     const userMessage = [
@@ -216,7 +216,7 @@ var PlantID = (() => {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
+        model: 'claude-sonnet-4-7',
         max_tokens: 1000,
         system: systemPrompt,
         messages: [{ role: 'user', content: userMessage }],
